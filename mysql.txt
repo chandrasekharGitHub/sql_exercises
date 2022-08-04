@@ -1,0 +1,303 @@
+MySQL
+
+1. MySQL is the most popular open source relational SQL database management system.
+
+2. MySQL is one of the best RDBMS being used for developing web-based software application.
+
+What is data?
+	Data can be facts related to any object in consideration.
+	
+	For example, your name, age, hight etc are some data related to you.
+	
+	An image, file, pdf etc can also be data.
+	
+What is database?
+	A database is systematic collection of data.
+	
+	They support electronic storage and manipulation of data.
+	
+	Databases make data management easy.
+	
+Database Components
+	1. Hardware
+	2. Software
+	3. Data
+	4. Procedure
+	5. Data Access Language
+
+What is DBMS (Database Management System)?
+
+	DBMS is a collection of programs that enable its users to access databases, manipulate data, report data.
+	
+	It also helps to control access to the database.
+	
+	Database management systems are not a new concept, it is first implemented in 1960's.
+	
+	Charles Bachman's Integrated Data Store(IDS) is the first DBMS in history.
+	
+How to create a database?
+create database MoviesDatabase;
+
+
+use MoviesDatabase;
+
+
+What is table?
+	1. Tables are database objects that contain all the data.
+	
+	2. In tables, data is logically organized in a row and column format similar to spread sheet.
+	
+	3. Each row represents a unique record.
+	
+	4. Each column represents a field in a record.
+	
+Creating a table.
+	By using "create" command.
+	
+What is InnoDB?
+	1. InnoDB is a general purpose storage engine that balances high reliability and high performance.
+	
+	2. From mysql 5.6, InnoDB is the default storage engine.
+	
+	3. Proir to InnoDB, MyISAM is the default storate engine.
+	
+SQL 
+
+1. Structured Query Language(SQL) as we all know is the database language by the use of which we can perform certain operations on the existing database and also we can create a new database.
+
+2. These SQL commands are mainly categorized into 4 types
+	1. DDL ==> Data Definition Language
+	2. DQL ==> Data Query Language
+	3. DML ==> Data Manupulation Language
+	4. DCL (TCL) ==> Data Control Language (Transaction Control Language)
+	
+DDL
+1. DDL actually consists those commands by which we can define the database schema.
+
+2. DDL is a set of SQL commands used to create, modify, and delete database structures but not data.
+
+List of DDL Commands
+1. CREATE
+2. DROP
+3. ALTER
+3. TRUNCATE
+4. RENAME
+
+ALTER
+	The MySQL alter command is used when you want to change name of your table, any fields(columns) or if you want to add or delete a column in the table.
+	
+TRUNCATE
+	This command is used to remove all records from a table.
+DML
+The SQL commands that deals with manipulation of data present in the database.
+
+List of DML Commands
+1. INSERT
+2. UPDATE
+3. DELETE
+
+INSERT
+	The insert statement allows you to insert one or more number of rows into a table.
+	
+auto_increment
+	for this type of column we never give the value while inserting.
+
+UPDATE
+The update command updates data in a table.
+
+
+DELETE
+	To delete data from a table.
+	
+	delete from <table-name>
+	where <condition>;
+	
+	
+14:45:13	delete from employees where employeeNumber = 1323	Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`classicmodels`.`customers`, CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`salesRepEmployeeNumber`) REFERENCES `employees` (`employeenumber`))	0.141 sec
+
+14:49:18	delete from customers  where customernumber=103	Error Code: 1451. Cannot delete or update a parent row: a foreign key constraint fails (`classicmodels`.`orders`, CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customerNumber`) REFERENCES `customers` (`customernumber`))	1.594 sec
+
+
+Constraints in mysql
+	Constraint?
+	a limitation or restriction.
+	
+Constraints in MySQL
+	1. null
+	2. not null
+	3. primary key
+	4. foreign key
+	
+
+15:24:18	insert customers(address) values('Mumbai')	Error Code: 1364. Field 'name' doesn't have a default value	0.031 sec
+
+15:26:49	insert customers values (1, 'Chaithu', 'Bangalore')	Error Code: 1062. Duplicate entry '1' for key 'PRIMARY'	0.125 sec
+
+an empty value is never equivalent to a null value.
+
+primary key never takes a duplicate value.
+
+foreign key constraint
+	a key will depending another key of another table.
+	
+	In this case one table will be related with another table.
+	
+	They are called in parent-child relation.
+	
+	One is parent table (master).
+
+	Other one is child table (details).
+	
+	departments
+	employees
+	
+Select Command
+	
+1. Select statement allows us to select data from one or more tables.
+
+sort
+
+select
+	select-list
+from <Table-Name>
+Order By
+	<column1> [ASC]/DESC,
+	<column2> [ASC]/DESC,.....;
+
+sort data using a custom list
+
+we must use field() method
+
+where clause
+	The where clause allows us to specify search condition for the rows returned by the query.
+	
+select
+	select-list
+from table-name
+where search-condtion;
+
+Here search condition is a combination of one or more expressions using logical operators AND, OR, NOT.
+
+
+When executing a select statement with a where clause, MySQL evaluates the where clause after the from clause.
+
+FROM -> WHERE -> SELECT -> ORDER BY
+
+IS NULL Operator
+
+1. To check if a value is null or not null, you have to use isnull operator , not the equal operator.
+
+where jobtitle = null == wrong
+
+where jobtitle is null ==> right
+
+2. The isnull operator returns True if a value is null.
+
+3. In the database terms, null is a marker that indicates that a value is missing or unknown.
+
+4.  null is not equivivalent to a number 0
+
+DISTINCT clause
+
+1. When querying data from a table, you may get duplicate rows.
+
+2. To remove duplicate rows, you use the distinct clause in the select statement.
+3. If you specify one column, the distinct clause evaluates the uniqueness of rows based on the values of that column.
+
+FROM -> WHERE -> SELECT -> DISTINCT -> ORDER BY
+
+
+LIKE
+	1. The like operator is logical operator that tests whether a string contains a specified pattern or not.
+	
+	2. The like operator is having two wildcards(%, _).
+	
+	3. % means any character and any no of characters.
+	
+	4. _ means any character and for one _ only one character.
+
+14:59:06	_	Error Code: 1064. You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '_' at line 1	0.000 sec
+
+
+joins
+
+1. A relational database consists of multiple related tables linking together using common columns, which are known as foreign key columns.
+
+2. join is a method of linking data between one or more tables based on values of the common column between the tables.
+
+3. MySQL supports the following types of joins
+
+1. Inner Join
+2. Left (Outer) Join
+3. Right (Outer) Join
+4. Cross Join
+ 
+Inner Join
+
+The inner join matches each row in one table with every rown in another table and allows you to query row that contain columns from both the tables.
+
+
+Left join
+
+
+select concat(emp.first_name,' ',emp.last_name) employee,
+        emp.salary emp_sal,
+        concat(mgr.first_name,' ',mgr.last_name) manager,
+        mgr.salary mgr_sal
+ from employees emp
+ join employees mgr on emp.manager_id = mgr.employee_id;
+
+
+
+
+set @input:=3;
+ select employee_id, 
+        first_name,
+        last_name,
+        job_id,
+        salary 
+ from employees e 
+ where @input =(select COUNT(DISTINCT Salary) 
+           from employees p 
+           where e.Salary<=p.Salary);
+
+
+
+
+
+
+
+
+select concat(first_name,' ',last_name) employee,
+ salary,
+ case
+ when salary >=2000 and salary < 5000 then "low" 
+ when salary >=5000 and salary < 10000 then "mid"
+ else
+ "high"
+ end as salary_level
+ from employees
+ order by 1;
+
+
+
+
+
+
+	
+
+
+	
+
+	
+
+
+
+	
+		
+	
+	
+	
+	
+
+
